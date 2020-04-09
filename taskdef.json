@@ -1,0 +1,24 @@
+{
+    "executionRoleArn": "arn:aws:iam::384612698411:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "MyWebService",
+            "image": "<IMAGE1_NAME>",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "containerPort": 80
+                }
+            ]
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "512",
+    "memory": "1024",
+    "family": "ecs-demo"
+}
