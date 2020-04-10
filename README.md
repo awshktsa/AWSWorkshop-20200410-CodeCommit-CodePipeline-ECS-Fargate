@@ -26,6 +26,18 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 - Click Next to enter "Name" = "Workshop_Cloud9"
 - and "Description" = "Temp EC2 Role for Workshop " and click "Create" for the Role.
 ------
+- Create Role, service pick "CodeDeploy" and click "Next"
+- Search "AWSCodeDeployRoleForECS", "AmazonS3ReadOnlyAccess", "AWSCodeDeployRole" and click the check box
+- Click Next, Inut Tag Key and Value if you want
+- Click Next to enter "Name" = "Workshop_CodeDeploy"
+- and "Description" = "Temp CodeDeploy Role for Workshop " and click "Create" for the Role.
+------
+- Create Role, service pick "CodeBuild" and click "Next"
+- Search "AmazonEC2ContainerRegistryFullAccess" and click the check box
+- Click Next, Inut Tag Key and Value if you want
+- Click Next to enter "Name" = "Workshop_CodeBuild"
+- and "Description" = "Temp CodeBuild Role for Workshop " and click "Create" for the Role.
+------
 
 ### Step 3: Launch a Cloud9 IDE for our workshop env 
 * **AWS Console > Services > Cloud9 > Create Environment**
@@ -138,13 +150,67 @@ docker push <repositoryUri>:latest
 * Clusters > Create Cluster > Type=Network Only (Fargate) > Cluster Name=fargate-prod
 * Clusters > Create Cluster > Type=Network Only (Fargate) > Cluster Name=fargate-beta
 * ***In this workshop, we try to simulate how we implement on real corp env, so we separate the services into two fargate clusters.***
-* Task Definitions > Create New Task Definition 
-
+------
+* Task Definitions > Create New Task Definition > Launch Type=Fargate > Next 
+* Task Definition Name=td-workshop-devops-ccef, Task Role=ecsTaskExecutionRole, Task Execution Role=ecsTaskExecutionRole
+* Task Size > Memory=1GB, CPU=0.5vCPU
+* Add Container > Container name=MyWebService,  Image=<repositoryUri>:latest, Soft Limit=1024, Port Mapping=80/TCP
+Example --> Image = 384612698411.dkr.ecr.ap-northeast-1.amazonaws.com/workshop-devops-ccef:latest)
+* Click ADD then back to Task Definiton
+------
+* Now we are going to create servcie on fargate cluster
+* Clusters > fargate-prod > Servcies > Create
+* Launch Type=FARGATE, Task Defintion=MyWebService, Cluster=fargate-prod
+* Service Name=***service-prod***, Service Type=REPLICA, Number of Tasks=2
+* Deployments > Deployment Type=Blue/green deployment (powered by AWS CodeDeploy), Depolyment Configuration=CodeDeployDefault.ECSAllAtOnce, Service role for CodeDepoly=Workshop_CodeDeploy, Placement Templates=AZ Balanced Spread
+* Click Next and start to setup VPC > VPC=default, Subnets=Select All, Security Group=***Workshop_port_80***, Health check grace period=30, Load balancer type=Application Load Balancer
+* Load balancer name=***alb-prod***, choose the Container name:port=MyWebService:80 and click ***Add to load balancer
+* Test Listener > unclick
+* Target group 1 name > Select existed > tg-prod
+* Target group 2 name > create new > use default like "tg-fargate-service-prod"
+* Service discovery > unclick
+* Click Next to Create
+------
+And also we will repeat this action to create a service for beta env.
+* Clusters > fargate-beta > Servcies > Create
+* Launch Type=FARGATE, Task Defintion=MyWebService, Cluster=fargate-prod
+* Service Name=***service-prod***, Service Type=REPLICA, Number of Tasks=2
+* Deployments > Deployment Type=Blue/green deployment (powered by AWS CodeDeploy), Depolyment Configuration=CodeDeployDefault.ECSAllAtOnce, Service role for CodeDepoly=Workshop_CodeDeploy, Placement Templates=AZ Balanced Spread
+* Click Next and start to setup VPC > VPC=default, Subnets=Select All, Security Group=***Workshop_port_80***, Health check grace period=30, Load balancer type=Application Load Balancer
+* Load balancer name=***alb-beta***, choose the Container name:port=MyWebService:80 and click ***Add to load balancer
+* Test Listener > unclick
+* Target group 1 name > Select existed > tg-beta
+* Target group 2 name > create new > use default like "tg-fargate-service-beta"
+* Service discovery > unclick
+* Click Next to Create
+------
+**From Step.4 ~ Step.6, now we are able to create service on Amazon Elastic Container Service with AWS Fargate sytle.
+------
+### Step 7.
+* Start to built our automation, we will leverage AWS CodePipeline to connect the service and flow.
+* Here we will separate the flow into two pipeline CI & CD
+* Now we build up the CI pipeline. 
+* ***AWS Console > Services > CodePipeline > Create Pipeline***
+* pipeline name=Code_to_Docker > Next
+* Source Stage > Source Provider=CodeCommit, Repository Name=workshop-devops-ccef, Branch Name=master, Change detection options
+=Amazon CloudWatch Events (recommended) > Next
+* Build Stage > Build Provider=CodeDeploy
+* Click Project > Project Name=Build_Code_To_ECR, Environment image=Managed image, Operating System=Ubuntu, Runtime=Standard, Image=aws/codebuild:2.0, Environment Type=Linux, ***Privileged (check)***
+* Role Name=***Workshop_CodeBuild***
+* Buildspec > select "Use a buildspec file" > Continue to Codepipeline
+Then you will see an information *Successfully created Build_Code_To_ECR in CodeBuild.*
+Before click to next stage, please click *add environment variable* and input following setting
+- AWS_ACCOUNT_ID=<your account Id>
+- AWS_DEFAULT_REGION=<where you are>
+- IMAGE_REPO_NAME=<Repo name>
+- IMAGE_TAG=latest
+* Click Next and ***Skip Deploy Stage*** > Create
+------
 
 
 
 ### After Workshop -- Clean up
-* *** clean up the ECS-Fargate stack with "cdk destroy"***
-* *** cloud up the Lambda SAM with "aws cloudformation delete-stack --stack-name=lambda-gin-refarch"***
-* *** Terminate the Cloud9 Env from AWS Console > Cloud9 > Environment > Delete***
-* *** Remove IAM Role/User from AWS Console > IAM > Role/User > Delete***
+* ***clean up the ECS-Fargate Cluster***
+* ***clean up CodePipeline, two pipelines***
+* ***Terminate the Cloud9 Env from AWS Console > Cloud9 > Environment > Delete***
+* ***Remove IAM Role/User from AWS Console > IAM > Role/User > Delete***
