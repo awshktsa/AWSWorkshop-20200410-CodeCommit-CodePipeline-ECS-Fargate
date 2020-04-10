@@ -21,7 +21,7 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 ### Step 2: Setup IAM Role/User for this workshop
 - **AWS Console > Services > IAM > Role**
 - Create Role, service pick "EC2" and click "Next"
-- Search "AWSCodeCommitFullAccess" and click the check box
+- Search "AWSCodeCommitFullAccess","AmazonEC2ContainerRegistryFullAccess" and click the check box
 - Click Next, Inut Tag Key and Value if you want
 - Click Next to enter "Name" = "Workshop_Cloud9"
 - and "Description" = "Temp EC2 Role for Workshop " and click "Create" for the Role.
