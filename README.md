@@ -200,14 +200,39 @@ And also we will repeat this action to create a service for beta env.
 * Buildspec > select "Use a buildspec file" > Continue to Codepipeline
 Then you will see an information *Successfully created Build_Code_To_ECR in CodeBuild.*
 Before click to next stage, please click *add environment variable* and input following setting
-- AWS_ACCOUNT_ID="<your account Id>"
-- AWS_DEFAULT_REGION="<where you are>"
-- IMAGE_REPO_NAME="<Repo name>"
+- AWS_ACCOUNT_ID=&lt;your account Id&gt;
+- AWS_DEFAULT_REGION=&lt;where you are&gt;
+- IMAGE_REPO_NAME=&lt;Repo name&gt;
 - IMAGE_TAG=latest
 * Click Next and ***Skip Deploy Stage*** > Create
 ------
-
-
+**Now Click "Release Change" and see how it goes**
+* AWS Console > Services > Elastic Container Registry > workshop-devops-ccef
+And you will see new Image been pushed onto ECR.
+------
+### Step.8
+* Now we are going to build up CD pipeline
+* ***AWS Console > Services > CodePipeline > Create Pipeline***
+* pipeline name=ECR_to_ECS > Next
+* * pipeline name=Code_to_Docker > Next
+* Source Stage > Source Provider=CodeCommit, Repository Name=workshop-devops-ccef, Branch Name=master, Change detection options
+=Amazon CloudWatch Events (recommended) > Next
+* ***Skip Build Stage*** > Next
+* Deploy Stage > Deploy Provider=Amazon ECS(Blue/Green), Application=AppECS-fargate-beta-service-beta, Deployment Group=Dgp-ECS-fargate-beta-service-beta, Amazon ECS task definition=SourceArtifact/taskdef.json, AWS CodeDeploy AppSpec file
+=SourceArtifact/appspec.yaml
+* Click Next > Create
+------
+Now we are not yet done on CD pipeline, for the Source provide we still lack the other half - ECR.
+* Click Edit on ***ECR_to_ECS*** pipeline
+* Then Edit on Source Stage, Click "Add Action"
+* Action Name=Image, Action Provider=Amazon ECR, Repository Name=workshop-devops-ccef, Image tag=latest, Output Artifact=***IMAGE1***
+* Click Done on Action and Source Stage
+* Click Edit on Deploy Stage
+* Edit CodeDeploy
+* Add Input Artifact, and select ***IMAGE1***
+* update Input artifact with image details=***IMAGE1***
+* update Placeholder text in the task definition=IMAGE1_NAME
+* Click Done on Action and Deploy Stage
 
 ### After Workshop -- Clean up
 * ***clean up the ECS-Fargate Cluster***
