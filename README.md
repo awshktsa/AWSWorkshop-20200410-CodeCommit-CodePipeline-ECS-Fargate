@@ -200,9 +200,9 @@ And also we will repeat this action to create a service for beta env.
 * Buildspec > select "Use a buildspec file" > Continue to Codepipeline
 Then you will see an information *Successfully created Build_Code_To_ECR in CodeBuild.*
 Before click to next stage, please click *add environment variable* and input following setting
-- AWS_ACCOUNT_ID=<your account Id>
-- AWS_DEFAULT_REGION=<where you are>
-- IMAGE_REPO_NAME=<Repo name>
+- AWS_ACCOUNT_ID="<your account Id>"
+- AWS_DEFAULT_REGION="<where you are>"
+- IMAGE_REPO_NAME="<Repo name>"
 - IMAGE_TAG=latest
 * Click Next and ***Skip Deploy Stage*** > Create
 ------
