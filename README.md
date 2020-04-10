@@ -222,7 +222,6 @@ And you will see new Image been pushed onto ECR.
 * Now we are going to build up CD pipeline
 * ***AWS Console > Services > CodePipeline > Create Pipeline***
 * pipeline name=ECR_to_ECS > Next
-* * pipeline name=Code_to_Docker > Next
 * Source Stage > Source Provider=CodeCommit, Repository Name=workshop-devops-ccef, Branch Name=master, Change detection options
 =Amazon CloudWatch Events (recommended) > Next
 * ***Skip Build Stage*** > Next
