@@ -89,6 +89,7 @@ docker build -t workshop-devops-ccef .
 ```
 Then, create ECR with awscli:
 ```
+sudo pip install --upgrade awscli
 aws ecr create-repository --repository-name workshop-devops-ccef
 ```
 And you will see ECR result as:
