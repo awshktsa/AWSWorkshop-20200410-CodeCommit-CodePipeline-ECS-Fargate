@@ -202,7 +202,7 @@ And also we will repeat this action to create a service for beta env.
 * pipeline name=Code_to_Docker > Next
 * Source Stage > Source Provider=CodeCommit, Repository Name=workshop-devops-ccef, Branch Name=master, Change detection options
 =Amazon CloudWatch Events (recommended) > Next
-* Build Stage > Build Provider=CodeDeploy
+* Build Stage > Build Provider=CodeBuild
 * Click Project > Project Name=Build_Code_To_ECR, Environment image=Managed image, Operating System=Ubuntu, Runtime=Standard, Image=aws/codebuild:2.0, Environment Type=Linux, ***Privileged (check)***
 * Role Name=***Workshop_CodeBuild***
 * Buildspec > select "Use a buildspec file" > Continue to Codepipeline
