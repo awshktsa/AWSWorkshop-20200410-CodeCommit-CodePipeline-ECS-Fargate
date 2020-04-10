@@ -210,7 +210,7 @@ Then you will see an information *Successfully created Build_Code_To_ECR in Code
 Before click to next stage, please click *add environment variable* and input following setting
 - AWS_ACCOUNT_ID=&lt;your account Id&gt;
 - AWS_DEFAULT_REGION=&lt;where you are&gt;
-- IMAGE_REPO_NAME=devops-workshop-ccef
+- IMAGE_REPO_NAME=workshop-devops-ccef
 - IMAGE_TAG=latest
 * Click Next and ***Skip Deploy Stage*** > Create
 ------
