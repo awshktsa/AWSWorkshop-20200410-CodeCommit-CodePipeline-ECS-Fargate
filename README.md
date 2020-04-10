@@ -4,13 +4,13 @@ An End to End flow from CodeCommit, through CodePipeline to build docker image t
 ------
 
 ## In this workshop, we will have a quick review following services:
-- Amazon Elastic Container Service (ECS) https://aws.amazon.com/ecs/(https://aws.amazon.com/ecs/)
-- Amazon Elastic Container Registry (ECR) https://aws.amazon.com/ecr/(https://aws.amazon.com/ecr/)
-- AWS Fargate https://aws.amazon.com/fargate/(https://aws.amazon.com/fargate/)
-- AWS CodeCommit https://aws.amazon.com/codecommit/(https://aws.amazon.com/codecommit/)
-- AWS CodeBuild https://aws.amazon.com/codebuild/(https://aws.amazon.com/codebuild/)
-- AWS CodeDeploy https://aws.amazon.com/codedeploy/(https://aws.amazon.com/codedeploy/)
-- AWS CodePipeline https://aws.amazon.com/codepipeline/(https://aws.amazon.com/codepipeline/)
+- Amazon Elastic Container Service (ECS) https://aws.amazon.com/ecs/
+- Amazon Elastic Container Registry (ECR) https://aws.amazon.com/ecr/
+- AWS Fargate https://aws.amazon.com/fargate/
+- AWS CodeCommit https://aws.amazon.com/codecommit/
+- AWS CodeBuild https://aws.amazon.com/codebuild/
+- AWS CodeDeploy https://aws.amazon.com/codedeploy/
+- AWS CodePipeline https://aws.amazon.com/codepipeline/
 ------
 
 ### Step 1:
