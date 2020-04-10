@@ -39,6 +39,13 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 - Click Next to enter "Name" = "Workshop_CodeBuild"
 - and "Description" = "Temp CodeBuild Role for Workshop " and click "Create" for the Role.
 ------
+- Create Role, service pick "Elastic Container Service" and "Elastic Container Service Task" click "Next"
+- Search "AmazonECSTaskExecutionRolePolicy","CloudWatchLogsFullAccess" and click the check box
+- Click Next, Inut Tag Key and Value if you want
+- Click Next to enter "Name" = "Workshop_ECSTask"
+- and "Description" = "Temp ECSTask Role for Workshop " and click "Create" for the Role.
+
+AmazonECSTaskExecutionRolePolicy
 
 ### Step 3: Launch a Cloud9 IDE for our workshop env 
 * **AWS Console > Services > Cloud9 > Create Environment**
