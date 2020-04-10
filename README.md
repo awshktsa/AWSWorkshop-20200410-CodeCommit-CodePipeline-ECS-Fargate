@@ -122,7 +122,7 @@ docker push <repositoryUri>:latest
 * ***AWS Console > Services > EC2 > Security Group***
 * Click ***Create Security Group***
 - Name=Workshop_port_80, VPC=Default, Description=Temp Security Group for Workshop
-- Inbound Rule > Add Rule > Type=HTTP, Destination=Anywhere
+- Inbound Rule > Add Rule > Type=HTTP, Source=Anywhere
 ------
 * ***AWS Console > Services > EC2 > Load Balancers
 * Click ***Create Load Balancer***
