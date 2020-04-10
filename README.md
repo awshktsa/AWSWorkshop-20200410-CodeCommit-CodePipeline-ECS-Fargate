@@ -236,9 +236,16 @@ Now we are not yet done on CD pipeline, for the Source provide we still lack the
 ------
 **Now Try to click "Release Change"
 ------
+### Step.8 (challenge)
+* Click Edit on ***ECR_to_ECS*** pipeline
+* Add a stage after deploy stage
+* Select Manual Approvaal as provider
+* Add a new stage after manual approval
+* **optional: Create an SNS topic to receive approval notification, and also add a subscription for this approval**
+* Repeat Step.7 to create a deployment toward prod Env (Application=AppECS-fargate-prod-service-prod)
 
 ### After Workshop -- Clean up
-* ***clean up the ECS-Fargate Cluster***
-* ***clean up CodePipeline, two pipelines***
+* ***clean up the 2 ECS-Fargate Cluster from AWS Console > Service > ECS***
+* ***clean up 2 CodePipeline from AWS Console > Service > CodePipeline***
 * ***Terminate the Cloud9 Env from AWS Console > Cloud9 > Environment > Delete***
-* ***Remove IAM Role/User from AWS Console > IAM > Role/User > Delete***
+* ***Remove 3 IAM Role from AWS Console > IAM > Role/User > Delete***
