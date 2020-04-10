@@ -26,11 +26,12 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 - Click Next to enter "Name" = "Workshop_Cloud9"
 - and "Description" = "Temp EC2 Role for Workshop " and click "Create" for the Role.
 ------
-- Create Role, service pick "CodeDeploy" and click "Next"
-- Search "AWSCodeDeployRoleForECS", "AmazonS3ReadOnlyAccess", "AWSCodeDeployRole", "CloudWatchLogsFullAccess" and click the check box
-- Click Next, Inut Tag Key and Value if you want
+- Create Role, service pick "CodeDeploy", select "ECS" and click to "Next"
 - Click Next to enter "Name" = "Workshop_CodeDeploy"
 - and "Description" = "Temp CodeDeploy Role for Workshop " and click "Create" for the Role.
+
+- Click "Attach Policy'
+- Search "AWSCodeDeployRoleForECS", "AmazonS3ReadOnlyAccess", "AWSCodeDeployRole", "CloudWatchLogsFullAccess" and click the check box
 ------
 - Create Role, service pick "CodeBuild" and click "Next"
 - Search "AmazonEC2ContainerRegistryFullAccess","CloudWatchLogsFullAccess" and click the check box
