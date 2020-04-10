@@ -175,7 +175,7 @@ Example --> Image = 384612698411.dkr.ecr.ap-northeast-1.amazonaws.com/workshop-d
 And also we will repeat this action to create a service for beta env.
 * Clusters > fargate-beta > Servcies > Create
 * Launch Type=FARGATE, Task Defintion=MyWebService, Cluster=fargate-prod
-* Service Name=***service-prod***, Service Type=REPLICA, Number of Tasks=2
+* Service Name=***service-beta***, Service Type=REPLICA, Number of Tasks=2
 * Deployments > Deployment Type=Blue/green deployment (powered by AWS CodeDeploy), Depolyment Configuration=CodeDeployDefault.ECSAllAtOnce, Service role for CodeDepoly=Workshop_CodeDeploy, Placement Templates=AZ Balanced Spread
 * Click Next and start to setup VPC > VPC=default, Subnets=Select All, Security Group=***Workshop_port_80***, Health check grace period=30, Load balancer type=Application Load Balancer
 * Load balancer name=***alb-beta***, choose the Container name:port=MyWebService:80 and click ***Add to load balancer
