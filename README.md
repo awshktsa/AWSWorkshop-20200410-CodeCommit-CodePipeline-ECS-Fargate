@@ -53,10 +53,8 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 - **Back to Cloud9 > Cloud9 Icon (Upper Left Corner) > Perference > AWS Settings > Credential > AWS Managed Temperory Credential > Off**
 ------
 
-### Step 4: Setup Go Development Environment in your Cloud9
+### Step 4: Setup Development Environment in your Cloud9
 - After the IDE launch, click to "bash" tab in the botton of the IDE page
-- We will follow the AWS Cloud9 User Guide to setup our Go env - https://docs.aws.amazon.com/cloud9/latest/user-guide/sample-go.html(https://docs.aws.amazon.com/cloud9/latest/user-guide/sample-go.html) has all the detail, and we copy the mendatory shell command in below:
-
 ```
 git clone https://github.com/awshktsa/AWSWorkshop-20200410-CodeCommit-CodePipeline-ECS-Fargate.git
 cd AWSWorkshop-20200410-CodeCommit-CodePipeline-ECS-Fargate
