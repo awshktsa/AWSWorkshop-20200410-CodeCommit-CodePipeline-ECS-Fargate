@@ -233,6 +233,9 @@ Now we are not yet done on CD pipeline, for the Source provide we still lack the
 * update Input artifact with image details=***IMAGE1***
 * update Placeholder text in the task definition=IMAGE1_NAME
 * Click Done on Action and Deploy Stage
+------
+**Now Try to click "Release Change"
+------
 
 ### After Workshop -- Clean up
 * ***clean up the ECS-Fargate Cluster***
