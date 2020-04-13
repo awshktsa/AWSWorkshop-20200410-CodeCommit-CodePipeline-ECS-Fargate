@@ -31,7 +31,7 @@ Pick one region close to you, if you don't have any prefer, use **us-east-1**
 - and "Description" = "Temp CodeDeploy Role for Workshop " and click "Create" for the Role.
 
 - Click "Attach Policy"
-- Search "AWSCodeDeployRoleForECS", "AmazonS3ReadOnlyAccess", "AWSCodeDeployRole", "CloudWatchLogsFullAccess" and click the check box
+- Search ***"AWSCodeDeployRoleForECS"*** and click the check box
 ------
 - Create Role, service pick "CodeBuild" and click "Next"
 - Search "AmazonEC2ContainerRegistryFullAccess","CloudWatchLogsFullAccess" and click the check box
